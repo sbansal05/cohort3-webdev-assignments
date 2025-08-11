@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Background Color Changer</title>
+    <style>
+        body {
+            margin: 0;
+            
+            font-family: Arial, sans-serif;
+           
+            background-color: #ffffff;
+        }
+        
+        .container {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .color-btn {
+            width: 48px;
+            height: 48px;
+            border: 2px solid #666;
+            cursor: pointer;
+            border-radius: 4px
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Background Color Changer</h1>
+        <div class="color-grid" id="colorButtons"></div>
+        <p>Current: <span id="currentColor">#ffffff</span></p>
+    </div>
+
+    <script>
+        // 1. Define colors
+        const colors = ['#ff0000', '#0000ff', '#00ff00', '#ffff00'];
+        
+        // 2. Get HTML elements
+        const colorButtonsContainer = document.getElementById('colorButtons');
+        const currentColorSpan = document.getElementById('currentColor');
+        const body = document.body;
+        
+        // 3. Function to change background
+        function changeBackgroundColor(color) {
+            body.style.backgroundColor = color;
+            currentColorSpan.textContent = color;
+        }
+        
+        // 4. Function to create a button
+        function createColorButton(color) {
+            const button = document.createElement('button');
+            button.className = 'color-btn';
+            button.style.backgroundColor = color;
+            button.addEventListener('click', function() {
+                changeBackgroundColor(color);
+            });
+            return button;
+        }
+        
+        // 5. Create all buttons
+        colors.forEach(function(color) {
+            const button = createColorButton(color);
+            colorButtonsContainer.appendChild(button);
+        });
+        
+        // 6. Set initial color
+        changeBackgroundColor('#ffffff');
+    </script>
+</body>
+</html>
+
