@@ -1,141 +1,114 @@
-body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #1a1a2e, #16213e);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  margin: 0;
-  color: #e0e0e0;
+/* --- Import Google Font --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+/* --- New Pastel Color Palette & Theme Variables --- */
+:root {
+  /* Redefine Bootstrap's theme colors with a pastel palette */
+  --bs-primary: #fd9b91; /* Gentle Coral/Rose */
+  --bs-primary-rgb: 253, 155, 145;
+  --bs-danger: #f2a2a7; /* Muted Pink for delete */
+  --bs-body-color: #5b5b5b; /* Soft Dark Grey Text */
+  --bs-body-bg: transparent;
+  --bs-border-radius: 0.5rem;
+  --bs-border-color: #f0e6e6;
+
+  /* Your custom theme variables */
+  --bg-gradient-start: #a0c4ff; /* Pastel Blue */
+  --bg-gradient-end: #ffb6c1; /* Pastel Pink */
+  --container-bg: #fffcfc; /* Soft Off-White */
+  --input-bg: #fdf6f6;
 }
 
-.container {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  padding: 30px;
-  width: 100%;
-  max-width: 400px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+/* --- General Styles & Background --- */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+  background-attachment: fixed;
+  padding-top: 10vh;
+}
+
+/* --- App Container Styling --- */
+.app-container {
+  max-width: 500px;
+  background: var(--container-bg);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(138, 130, 130, 0.1);
+  margin-inline: auto;
 }
 
 h1 {
+  color: var(--bs-primary);
+  font-weight: 600;
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 28px;
-  color: #9d4edd;
 }
 
-.input-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
+/* --- Custom Form & Button Styles --- */
+.form-control {
+  background-color: var(--input-bg);
+  color: var(--bs-body-color);
+  border: 1px solid var(--bs-border-color);
 }
 
-.bookmark-inputs {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%;
+.form-control:focus {
+  background-color: var(--container-bg);
+  color: var(--bs-body-color);
+  border-color: var(--bs-primary);
+  box-shadow: 0 0 0 3px rgba(var(--bs-primary-rgb), 0.25);
 }
 
-.todo-input {
-  padding: 12px;
-  border: none;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #e0e0e0;
-  font-size: 16px;
-  width: 100%;
-  box-sizing: border-box;
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-bg: #fc8277;
+  --bs-btn-hover-border-color: #fc8277;
+  font-weight: 500;
+  color: #fff;
 }
 
-.todo-input::placeholder {
-  color: #a0a0a0;
+/* --- Custom List Group (Bookmark List) Styles --- */
+.list-group {
+  --bs-list-group-bg: transparent;
+  --bs-list-group-border-color: transparent;
 }
 
-#add-todo-btn {
-  padding: 12px;
-  border: none;
-  border-radius: 10px;
-  background-color: #5a189a;
-  color: #e0e0e0;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.list-group-item {
+  background-color: #fff;
+  border: 1px solid var(--bs-border-color);
+  transition: all 0.2s ease-in-out;
+  padding: 0.75rem 1.25rem;
 }
 
-#add-todo-btn:hover {
-  background-color: #7b2cbf;
+.list-group-item:not(:last-child) {
+  margin-bottom: 0.5rem;
 }
 
-#bookmark-list {
-  list-style-type: none;
-  padding: 0;
+.list-group-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(212, 195, 195, 0.2);
+  border-left: 4px solid var(--bs-primary);
 }
 
-#bookmark-list li {
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 10px;
-  padding: 12px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-#bookmark-list li.completed {
+.list-group-item.completed {
   text-decoration: line-through;
   opacity: 0.6;
 }
 
-button {
-  background-color: #c9184a;
-  color: #e0e0e0;
-  border: none;
-  border-radius: 5px;
-  padding: 5px 10px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.btn-danger {
+    --bs-btn-color: #e57373;
+    --bs-btn-border-color: transparent;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--bs-danger);
+    --bs-btn-hover-border-color: var(--bs-danger);
+    font-weight: 500;
 }
 
-button.delete-btn:hover {
-  background-color: #ff4d6d;
-}
-
-.todo-input:focus,
-#add-todo-btn:focus,
-button.delete-btn:focus {
-  outline: 2px solid #9d4edd;
-  outline-offset: 2px;
-}
-
+/* Animation for new items */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 #bookmark-list li {
-  animation: fadeIn 0.3s ease-out;
-}
-
-@media (min-width: 480px) {
-  .bookmark-inputs {
-    flex-direction: row;
-  }
-
-  .todo-input[placeholder="Enter a bookmark url"] {
-    flex: 2;
-  }
-
-  .todo-input[placeholder="Enter a category"] {
-    flex: 1;
-  }
+  animation: fadeIn 0.4s ease-out;
 }
