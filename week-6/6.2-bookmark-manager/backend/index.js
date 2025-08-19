@@ -7,8 +7,11 @@ const PORT = 3001;
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static('../frontend'));
 
-
+app.get("/", function(req, res) {
+    res.sendFile(__dirname, "../frontend/index.html");
+})
 // Get all bookmarks
 app.get('/bookmarks', getAllBookmarks);
 
@@ -24,3 +27,4 @@ app.delete('/bookmarks/:id', deleteBookmark);
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
